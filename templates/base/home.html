@@ -1,0 +1,42 @@
+{%extends 'base/main.html' %}
+{% block content%}
+ 
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 2fr;
+        
+    }
+</style>
+
+<div class="home-container">
+    
+        <div>
+            {% include 'base/topic_component.html'%}
+
+
+
+
+            
+        </div>       
+        <div>
+            
+          <a style="text-decoration:none" href="{% url 'base:create-room' %}">
+                    
+                <h3>  <span right-margin=100px> Create room</span></h3> 
+                </button></a><hr>
+                    
+         {% include 'base/feed_component.html'%}
+
+                
+        </div>
+        <div>
+            
+            {% include 'base/activity.html'%}
+
+
+        </div>
+    </div>   
+
+
+{%endblock content%}

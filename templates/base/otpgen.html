@@ -1,0 +1,21 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+
+<style>
+    .changepassword{
+        margin-left: auto;
+        margin-right: auto;
+        width: 20em
+    }
+</style>
+
+<div class='changepassword'>
+
+<form method = 'POST'>
+    {% csrf_token %}<br><br>
+    {{form.as_p}}
+    <button type='submit' class='btn btn-primary' > Generate OTP</button>
+</form>
+</div>
+{% endblock content %}

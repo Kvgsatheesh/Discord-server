@@ -1,0 +1,24 @@
+{%extends 'base/main.html'%}
+
+{% block content %}
+
+<style>
+    .updatemsg{
+        margin-left: auto;
+        margin-top: 100px;
+       
+        margin-right: auto;
+        width: 25em
+    }
+</style>
+<div class='updatemsg'>
+
+<form method=POST>
+    {% csrf_token %}
+    
+    <input type='text' value={{msg}} name='body'><br><br>
+   
+    <input type='submit' value='update'<button type="button" class="btn btn-success"> </button>
+    <a href="{{request.META.HTTP_REFERER}}"><button type="button" class="btn btn-secondary"> Go back</button></a><br><br
+</div>
+{% endblock content %}

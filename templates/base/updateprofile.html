@@ -1,0 +1,43 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+<style>
+    .updateprofile{
+        margin-left: auto;
+        margin-right: auto;
+        width: 30em
+    }
+    .container{
+        display: grid;
+        grid-template-columns:  3fr 1fr;
+    }
+    
+</style>
+<div class='container'>
+    <div class='updateprofile'>
+   
+    <form method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        <br>
+        {{form.as_p}}
+        {{form2.as_p}}
+        
+
+        <input type='submit' value='update'<button type="button" class="btn btn-success"> </button>
+        <a href="{{request.META.HTTP_REFERER}}"><button type="button" class="btn btn-secondary"> Go back</button></a><br>
+    
+    </div>
+
+    </form>
+    <div>
+        <ul>
+            <li><b> username..</b>
+                Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</li>
+        </ul>
+    </div>
+
+</div>
+
+
+
+{% endblock content %}

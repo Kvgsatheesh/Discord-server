@@ -1,0 +1,21 @@
+{%extends 'base/main.html'%}
+{%block content%}
+
+<style>
+    .room{
+        margin-left: auto;
+        margin-right: auto;
+        width:30em
+    }
+  </style>
+
+<div class='room'>
+    <br>
+<form method='POST'>
+    {% csrf_token %}
+{{form.as_p}}
+    <input type='submit' value='create'<button type="button" class="btn btn-primary"> </button>
+    <a href="{{request.META.HTTP_REFERER}}"><button type="button" class="btn btn-secondary"> Go back</button></a><br><br>
+</form>
+</div>
+{% endblock content%}

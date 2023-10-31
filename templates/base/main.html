@@ -1,0 +1,27 @@
+
+   
+    
+{% include "base/navebar.html" %}
+
+
+{%for msg in messages %}
+<hr>
+<div class="alert alert-danger" role="alert">
+  {{msg}}
+</div>
+
+<hr>
+{%endfor%}
+<style>
+    img {
+
+    border-radius: 50%;
+    
+  }
+</style>
+    {% block content%}
+
+    {%endblock content%}
+
+
+

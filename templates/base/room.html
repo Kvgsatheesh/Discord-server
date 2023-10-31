@@ -1,0 +1,91 @@
+{%extends 'base/main.html'%}
+{%block content%}
+
+
+<style>
+    .room-container{
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+
+    .first{
+        margin-left: 50px ;
+    }
+    
+</style>
+<div class='room-container'>
+     <div class='first'>
+            <div>
+                    created by <a href="{ url 'base:profile' room.host.id }">
+                        <button type="button" class="btn btn-light">
+                            <img src={{room.host.profile.avator.url}} width=30px > {{room.host}}</button>
+</a><hr>
+                   <p> <span class="badge text-bg-light" >Topic</span> {{room.name}}<hr>
+                   </p>
+                    <p><span class="badge text-bg-light">Description</span> {{room.description}}</p><hr>
+            </div>
+        
+            <div class='comment-wrapper'>
+                    <h3><span class="badge text-bg-light">Conversation</span></h3>
+                    <hr>
+                    {%for m in msg%}
+                    <div>
+                        
+                    <h6><p><i><a href="{% url 'base:profile' m.user.id%}"><span class="badge text-bg-light">
+                        <img src={{m.user.profile.avator.url}} width=20px >
+                        {{m.user}}</b></span></a></i> {{m.created|timesince}}<p>
+                    </h6><p><h5>{{m.body}}</h5></p>
+                        {%if request.user == m.user %}
+                        <a href="/delete-msg/{{m.id}}/{{room.id}}"><span class="badge text-bg-danger">Delete</span></a>
+                        <a href="{% url 'base:update-message' m.id room.id %}"><span class="badge text-bg-primary">edit</a>
+                        {% elif request.user.is_superuser %}
+                        <a href="/delete-msg/{{m.id}}/{{room.id}}"><span class="badge text-bg-danger">Delete</span></a>
+                        <a href="{% url 'base:update-message' m.id room.id %}"><span class="badge text-bg-primary">edit</a>
+                        {% elif request.user == room.host %}
+                        <a href="/delete-msg/{{m.id}}/{{room.id}}"><span class="badge text-bg-danger">Delete</span></a>
+                        <a href="{% url 'base:update-message' m.id room.id %}"><span class="badge text-bg-primary">edit</a>
+                        
+
+                            {%endif%}
+            
+                        <hr>
+                    </div>
+                    {%endfor%}
+                
+            
+
+
+                <div class='comment-form'>
+                        {%if request.user.is_authenticated %}
+                        <form method='POST'>
+                            {% csrf_token %}
+                            <input type='text' name='body' placeholder='type here...'>
+                        </form>
+                        {%endif%}
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div class='participants'>
+                <h3>participants</h3> <h6>({{room.participants.count}})</h6>
+                            <hr>
+                    {%for i in participant %}
+                    <div>
+                       
+                        <h5><p><a href="/profile/{{i.id}}">
+                            <span class="badge text-bg-light"><img src={{i.profile.avator.url}} width=30px >{{i}}</span></p></a></h5>
+                            {% comment %} {%if request.user == room.host %}
+                             
+                            
+                                <a href="{% url 'base:blockparticipants' i.id room.id %}"><span class="badge text-bg-primary">block</a>
+                        
+                        {%endif%} {% endcomment %}
+                        </div>
+                    {%endfor%}
+            </div>
+
+        </div>
+    </div>
+{%endblock content%}

@@ -1,0 +1,37 @@
+
+
+<style>
+  .topic{
+      margin-left: auto;
+      margin-right: auto;
+      width:12em
+  }
+</style>
+
+
+ <div class="topic"> 
+  <div>
+                <h3>Browse topic</h3><hr>
+                <a style="text-decoration:none" href="/addtopic">
+                  <span class="badge text-bg-light">Add new topic</span></a>
+<br><br>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="fw-bold"><a class="dropdown-item" style="text-decoration:none" href="{% url 'base:home' %}?q=">Available rooms     {{rooms.count}}</a>
+
+                </div>
+            </li>
+                <ol class="list-group list-group-numbered">
+                    {%for i in topic %}
+                    
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+
+              <div class="ms-2 me-auto">
+                <div class="fw-bold"><a class="dropdown-item" style="text-decoration:none" href="{% url 'base:home' %}?q={{i.name}}"><b>{{i}}</b></a>
+                </div>
+
+              </div>
+                <span class="badge bg-primary rounded-pill">{{i.room_set.all.count}}</span>
+              </li>{%endfor%}
+              </ol>
+    </div>
+ </div>

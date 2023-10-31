@@ -1,0 +1,31 @@
+
+
+{% extends "base/main.html" %}
+
+{% block content %}
+
+<style>
+  .block{
+      margin-left: auto;
+      margin-top: 100px;
+     
+      margin-right: auto;
+      width: 25em
+  }
+</style>
+
+
+
+
+<div class='block'>
+
+<form method=POST>
+    {% csrf_token %}
+    <h4>are you want to block   <div class="alert alert-danger" role="alert">{{participant.username}}</div>  from <u>{{room.name}}</u>.</h4><br>
+ 
+  <br>
+ <button type="submit" class="btn btn-danger"> block </button>
+<a href="{{request.META.HTTP_REFERER}}"><button type="button" class="btn btn-secondary"> Go back</button></a><br><br>
+</form>
+</div>
+{% endblock content %}

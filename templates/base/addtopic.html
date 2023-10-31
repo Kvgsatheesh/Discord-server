@@ -1,0 +1,22 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+<style>
+    .addtopic{
+        margin-left: auto;
+        margin-right: auto;
+        width: 20em
+    }
+</style>
+
+<div class='addtopic'>
+<form method=POST>
+    <br><br><br>
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type='submit' value='add'<button type="button" class="btn btn-primary"> </button>
+    
+</form>
+</div>
+{% endblock content %}
+

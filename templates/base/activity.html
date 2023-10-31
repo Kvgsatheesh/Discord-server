@@ -1,0 +1,51 @@
+
+<style>
+  .activity{
+      margin-left: auto;
+      margin-right: auto;
+      width: 20em
+
+  }
+  
+</style>
+
+
+
+<div class="activity">  
+
+<h3>Recent activity</h3>
+
+    <hr>
+     <div>
+    {%for i in allmsg%}
+    <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+    <div class="card border-success mb-3" style="max-width: 18rem;">
+     
+        <div class="card-header bg-transparent border-success">
+            <a style="text-decoration:none" href="{% url 'base:profile' i.user.id %}"><b><i><img class="img-fluid" src="{{i.user.profile.image}}" class="rounded-circle"  width=40px >{{i.user}}</i></b> </a><small>{{i.created|timesince}}</small></div>
+        <div class="card-body text-success">
+          <h5 class="card-title">{{i.body|truncatechars:25}}</h5>
+          <p class="card-text"><small>replied to </small> <a style="text-decoration:none" href="/room/{{i.room.id}}" ><b>{{i.room}}</b></a></p>
+        </div>
+        
+        <div class="card-footer bg-transparent border-success"><small>{{i.room.participants.count}} joined</small><br>
+          {%if request.user == i.user%}
+          
+            <a href="{% url 'base:adelete-message' i.id%}"><span class="badge text-bg-danger"><small>Delete</small></span></a>
+            <a href="/update-message/{{i.id}}/{{i.room.id}}"><span class="badge text-bg-primary"><small>Edit</small></span></a>
+        {%elif request.user.is_superuser%}
+          <a href="{% url 'base:adelete-message' i.id%}"><span class="badge text-bg-danger"><small>Delete</small></span></a>
+          <a href="/update-message/{{i.id}}/{{i.room.id}}"><span class="badge text-bg-primary"><small>Edit</small></span></a>
+         {% elif request.user == i.room.host %}
+          <a href="{% url 'base:adelete-message' i.id%}"><span class="badge text-bg-danger"><small>Delete</small></span></a>
+          <a href="/update-message/{{i.id}}/{{i.room.id}}"><span class="badge text-bg-primary"><small>Edit</small></span></a>
+         
+          {%endif%}</div> </div>
+      </div> 
+
+      {%endfor%}
+
+    </div>
+  </div>
+
+

@@ -1,0 +1,75 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+{% load socialaccount %} 
+<style>
+
+    .signup{
+        margin-left: auto;
+        margin-right: auto;
+        width: 30em
+    }
+
+    .sign{
+        display: grid;
+        grid-template-columns:  3fr 2fr;
+        
+
+    }
+</style>
+
+<div>
+    <br>
+            {%if page == 'login'%}
+            <div class='signup'>
+
+                <form method='POST'>
+                    {% csrf_token %}
+
+                    <label>Username</label>
+                    <input type='text' name='username'>
+                    <br><br>
+                    <label>Password</label>
+                    <input type='password' name='password'>
+                    <br>  <br>   
+                    <button type="submit" class="btn btn-primary"> Login</button>
+                    <br><br>
+                    <a style="text-decoration:none" href="/otpgen"> login with otp</a> |
+                    <a style="text-decoration:none" href="/passwordreset"> Reset password</a>
+
+                <hr>
+<br>
+                
+                    <a href="{% provider_login_url 'google' %}?next=/">
+                        <button type="button" class="btn btn-primary">Login with google</button>
+                    </a>
+                </div>
+
+
+
+
+                {%endif%}
+
+            {% if page == 'signup' %}
+                <div class='sign'>
+                    <div class='signup'>
+                    <form method='POST'>
+                        {% csrf_token %}
+                    
+                        {{form.as_p}} <br>
+                        
+                        <button type="submit" class="btn btn-primary"> create</button>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>Your password can’t be too similar to your other personal information.</li>
+                            <li>Your password must contain at least 8 characters.</li>
+                            <li>Your password can’t be a commonly used password.</li>
+                            <li>Your password can’t be entirely numeric.</li>
+                        </ul>
+                    </div>
+        </div>
+
+            {%endif%}
+            {% endblock content %}  
+</div>

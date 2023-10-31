@@ -1,0 +1,66 @@
+
+
+<style>
+    .feed{
+        margin-left: auto;
+        margin-right: auto;
+        width: 20em
+        
+    }
+    
+</style>
+ <div class="feed">
+    
+    {%for i in rooms%}
+    
+    <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+    <div class="card border-success mb-3" style="max-width: 18rem;">
+        <div class="text-bg-light p-3">
+    <div class="card-header bg-transparent border-success">
+       
+        <a style="text-decoration:none" href="{% url 'base:profile' i.host.id %}"><b><i>
+        
+
+
+ <img class="img-fluid"  src="{{i.host.profile.image}}" width=40px alt='{{i.host}}'>
+ {{i.host}}</i></b></a> {{i.created|timesince}} ago</div> 
+
+            
+    <div class="card-body text-success">
+      <h5 class="card-title"><a style="text-decoration:none" href="/room/{{i.id}}" > <h5>{{i.name}}</h5> </a>
+      </h5>
+      <p class="card-text"><h6>{{i.topic}}</h6></p>
+    </div>
+    <div class="card-footer bg-transparent border-success"><span>{{i.participants.count}} joined</span>
+        {%if request.user == i.host%}
+        <a href="/delete-room/{{i.id}}"><span class="badge text-bg-danger">Delete</span></a>
+        <a href="/update-room/{{i.id}}"><span class="badge text-bg-primary">Edit</span></a>
+        {%elif request.user.is_superuser%}
+        <a href="/delete-room/{{i.id}}"><span class="badge text-bg-danger">Delete</span></a>
+        <a href="/update-room/{{i.id}}"><span class="badge text-bg-primary">Edit</span></a>
+        
+        {%endif%}
+      
+    </div>
+    </div>
+</div></div>
+    {%endfor%}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
